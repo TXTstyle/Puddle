@@ -1,29 +1,19 @@
 #include <raylib-cpp.hpp>
 
-int main() {
-    
-    // Initialization
-    int screenWidth = 800;
-    int screenHeight = 450;
+#include "game/Game.hpp"
 
-    raylib::Color textColor(BLACK);
-    raylib::Window w(screenWidth, screenHeight, "Puddle");
-    
-    SetTargetFPS(60);
+int main() {
+    Game::Init();
 
     // Main game loop
-    while (!w.ShouldClose()) // Detect window close button or ESC key
+    while (!Game::GetWindow().ShouldClose()) // Detect window close button or ESC key
     {
-        // Update
-
-        // TODO: Update your variables here
-
-        // Draw
+        Game::Update();
         BeginDrawing();
-        ClearBackground(BLUE);
-        textColor.DrawText("Welcome to Puddle!", 190, 200, 20);
+            Game::Draw();
         EndDrawing();
     }
 
+    Game::Shutdown();
     return 0;
 }
