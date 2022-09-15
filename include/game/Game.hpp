@@ -5,6 +5,7 @@
 #include <raylib-cpp.hpp>
 
 #include "game/Ball.hpp"
+#include "game/Player.hpp"
 
 class Game
 {
@@ -16,6 +17,7 @@ private:
     static raylib::Color boardColor;
 
     static std::vector<Ball> Balls;
+    static Player player;
 public:
     
     static void Init();

@@ -8,7 +8,6 @@ private:
     float fric = 0.05f;
     raylib::Color color;
     raylib::Vector2 pos;
-    raylib::Vector2 dir = raylib::Vector2(1, 1);
     raylib::Vector2 vel = raylib::Vector2(0, 0);
 public:
     Ball(raylib::Vector2 p_pos, float p_radie, raylib::Color p_color);

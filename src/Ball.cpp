@@ -18,25 +18,25 @@ void Ball::Draw() {
 }
 
 void Ball::Update() {
-    pos += vel * dir;
+    pos += vel;
 
     if(pos.x >= 1024-radie) {
-        dir.x *= -1;
+        vel.x *= -1;
         vel *= 1-fric*2;
         pos.x = 1024-radie;
     }
     if(pos.x <= 256+radie) {
-        dir.x *= -1;
+        vel.x *= -1;
         vel *= 1-fric*2;
         pos.x = 256+radie;
     }
     if(pos.y <= 144+radie) {
-        dir.y *= -1;
+        vel.y *= -1;
         vel *= 1-fric*2;
         pos.y = 144+radie;
     }
     if(pos.y >= 576-radie) {
-        dir.y *= -1;
+        vel.y *= -1;
         vel *= 1-fric*2;
         pos.y = 576-radie;
     }
