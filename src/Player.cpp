@@ -7,13 +7,14 @@ Player::Player()
 void Player::Update() {
     raylib::Vector2 pos3(raylib::Mouse::GetPosition()-ball.GetPos());
 
-    if(holdShot == 1 && IsKeyUp(KEY_SPACE)) {
+    if(holdShot == 1 && IsMouseButtonUp(MouseButton::MOUSE_BUTTON_LEFT)) {
         holdShot = false;
         ball.AddVel(-(pos3).Normalize()*power);
     }
 
-    power = (pos3.Length())*0.05f;
-    if(IsKeyPressed(KEY_SPACE)) {
+    power = (pos3.Length())*0.1f;
+    if(IsMouseButtonDown(MouseButton::MOUSE_BUTTON_LEFT) 
+        && CheckCollisionPointCircle(raylib::Mouse::GetPosition(), ball.GetPos(), 25.0f)) {
         holdShot = true;
     }
 
@@ -25,7 +26,7 @@ void Player::Draw() {
     //raylib::DrawText(std::to_string(holdShot), 10, 10, 10, raylib::Color(RED));
 
     if(holdShot) {
-        ball.GetPos().DrawLine((raylib::Mouse::GetPosition()-ball.GetPos()).Normalize()*power+ball.GetPos(), raylib::Color(WHITE));
+        ball.GetPos().DrawLine((raylib::Mouse::GetPosition()-ball.GetPos()).Normalize()*2.0f*power+ball.GetPos(), raylib::Color(WHITE));
         raylib::DrawText(std::to_string((int)power), 700, 100, 16, raylib::Color(WHITE));    
     }
     ball.Draw();

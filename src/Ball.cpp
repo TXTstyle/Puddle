@@ -18,7 +18,7 @@ void Ball::Draw() {
 }
 
 void Ball::Update() {
-    pos += vel;
+    pos += vel * GetFrameTime() * 10;
 
     if(pos.x >= 1024-radie) {
         vel.x *= -1;

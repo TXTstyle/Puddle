@@ -20,9 +20,17 @@ void Game::Init() {
 }
 
 void Game::Update() {
-    if(CheckCollisionCircles(player.GetBall().GetPos(), 6.5f, Balls[0].GetPos(), 6.5f)) {
-        Balls[0].AddVel(-(player.GetBall().GetPos()-Balls[0].GetPos()));
-        player.GetBall().AddVel(-(Balls[0].GetPos()-player.GetBall().GetPos()));
+    
+    if(CheckCollisionCircles(player.GetBall().GetPos(), 6.0f, Balls[0].GetPos(), 6.0f)) {
+        raylib::Vector2 bVec = player.GetBall().GetVel();
+        raylib::Vector2 vec = player.GetBall().GetPos()-Balls[0].GetPos();
+        Balls[0].AddPos(Balls[0].GetPos().Distance(player.GetBall().GetPos())*0.25f);
+        Balls[0].AddVel(-vec*0.5f);
+        //player.GetBall().AddVel(-(Balls[0].GetPos()-player.GetBall().GetPos()));
+        player.GetBall().AddVel(-(-vec-player.GetBall().GetVel())*0.5f);
+        player.GetBall().AddPos(-(Balls[0].GetPos().Distance(player.GetBall().GetPos()))*0.25f);
+        if(bVec.Length() < player.GetBall().GetVel().Length())
+            player.GetBall().SetLen(bVec.Length());
     }
 
     player.Update();
@@ -44,7 +52,6 @@ void Game::Draw() {
     {
         ball.Draw();
     }
-    
 }
 
 void Game::Shutdown() {
